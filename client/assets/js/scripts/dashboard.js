@@ -1,36 +1,42 @@
 const isLoggedIn = localStorage.getItem("isLoggedIn");
     const username = localStorage.getItem("username");
 
-    if (isLoggedIn === "true" && username) {
-      document.getElementById("acc-num").innerText = acc_num;
-      document.getElementById("balance").innerText = balance;
-      document.getElementById("deposits").innerText = acc_num;
-      document.getElementById("withdrawals").innerText = withdraw;
-      document.getElementById("transactions").innerText = transactions;
-      document.getElementById("idr").innerText = idr;
-      document.getElementById("dps").innerText = dps;
-      document.getElementById("loans").innerText = loans;
+    const loginEndpoint = 'https://stantrust-server.onrender.com';
 
-
-      // Sample user data (replace this with your actual data fetching logic)
-      const userData = {
-        name: "John Doe",
-        email: "john@example.com",
-        // Add more user data properties here...
-      };
-
-      displayUserData(userData);
-    } else {
-      // Redirect to the login.html page if the user is not logged in
-      window.location.href = "login.html";
-    }
-
-    function displayUserData(data) {
-      const userDataDiv = document.getElementById("userData");
-      // Display fetched user data
-      for (const key in data) {
-        if (data.hasOwnProperty(key)) {
-          userDataDiv.innerHTML += `<p><strong>${key}:</strong> ${data[key]}</p>`;
-        }
+    fetch(`${loginEndpoint}/dashboard/${username}`) // Replace URL with your API endpoint
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok.');
       }
+      //return response.json();
+      return response.json();
+
+    })
+    .then(data => {
+      // Once data is fetched, handle and display it
+      displayUserData(data);
+      console.log("log is",data)
+
+    })
+    .catch(error => {
+      console.error('There has been a problem with your fetch operation:', error);
+    });
+
+
+  function displayUserData(res) {
+      if (isLoggedIn === "true" && username) {
+        const data = JSON.parse(res.data)
+        document.getElementById("acc-num").innerText = data.account;
+        document.getElementById("balance").innerText = `$${data.balance}.00`;
+        document.getElementById("deposits").innerText = `$${data.deposits}.00`;
+        document.getElementById("withdrawals").innerText = `$${data.deposits}.00`;
+        //document.getElementById("transactions").innerText = res.transactions;
+        // document.getElementById("idr").innerText = res.idr;
+        // document.getElementById("dps").innerText = res.dps;
+        // document.getElementById("loans").innerText = res.loans;    
+      } else {
+        // Redirect to the login.html page if the user is not logged in
+        window.location.href = "login.html";
+      }
+  
     }
