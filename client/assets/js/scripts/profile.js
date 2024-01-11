@@ -20,7 +20,7 @@ const username = localStorage.getItem("username");
       console.error('There has been a problem with your fetch operation:', error);
     });
     function displayUserData(res) {
-      if (isLoggedIn === "true" && username) {
+      if (username) {
         const data = JSON.parse(res.data)
         document.getElementById("user").innerText = data.username;
         document.getElementById("email").innerText = data.email;
