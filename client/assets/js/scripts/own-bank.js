@@ -72,9 +72,28 @@ document.getElementById('make_transfer').addEventListener('submit', function(eve
 
     })
     .then(data => {
+  
+
       // Once data is fetched, handle and display it
+
       const res = JSON.parse(data.data)
       let balance = res.balance;
+      
+      
+      let active = res.active;
+      if (active == "false"){
+        iziToast.error({
+          title: 'Error',
+          message: 'There is an issue with your account, please contact support',
+          position: 'topRight'
+        })
+        submit_btn.disabled = false
+        setTimeout(function(){
+          window.location.reload()
+        }, 5000)
+       
+      }else {
+
       if(parseInt(amount) > parseInt(balance)){
         iziToast.error({
           title: 'Info',
@@ -129,7 +148,7 @@ document.getElementById('make_transfer').addEventListener('submit', function(eve
       }, 100);
     }
 
-
+  }
 
     })
     .catch(error => {
