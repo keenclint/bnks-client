@@ -37,9 +37,9 @@ function displayUserData(res) {
   if (isLoggedIn === "true" && username) {
     const data = JSON.parse(res.data)
     document.getElementById("acc-num").innerText = data.account;
-    document.getElementById("balance").innerText = `$${data.balance}.00`;
-    document.getElementById("deposits").innerText = `$${data.deposits}.00`;
-    document.getElementById("withdrawals").innerText = `$${data.withdrawals}.00`;
+    document.getElementById("balance").innerText = `$${data.balance.toLocaleString()}.00`;
+    document.getElementById("deposits").innerText = `$${data.deposits.toLocaleString()}.00`;
+    document.getElementById("withdrawals").innerText = `$${data.withdrawals.toLocaleString()}.00`;
     //document.getElementById("transactions").innerText = transactions;
     // document.getElementById("idr").innerText = res.idr;
     // document.getElementById("dps").innerText = res.dps;

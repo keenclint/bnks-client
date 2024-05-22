@@ -17,7 +17,7 @@ const inputField = document.getElementById('addr');
 inputField.addEventListener('input', function() {
 
 const value = inputField.value;
-  if (value.length === 15){
+  if (value.length === 15 || value.length === 10){
     fetch(`${loginEndpoint}/account_num/${value}`)
     .then(response => {
       if (!response.ok) {
