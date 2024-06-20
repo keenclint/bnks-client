@@ -95,7 +95,7 @@
                 </a>
             </div>
             <div class="middle">
-                <form action="" id="register" method="POST" class="account-form">
+                <form action="" id="register" class="account-form" enctype="multipart/form-data" method="post" >
                     <input type="hidden" name="_token" value="Zy6b394W1lNOxEaENfWitkO2riPIkOZAIxQzMWr1">                    <div class="row">
                                                 <div class="col-md-6">
                             <div class="form-group">
@@ -891,6 +891,8 @@
                                 <input type="password" class="form--control" id="password2" name="password_confirmation" required>
                             </div>
                         </div>
+                        <label for="file">Upload Profile Picture:</label>
+                            <input type="file" name="file" id="file"><br>
                         <div class="form-group">
         <div class="mb-2">
         </div>
